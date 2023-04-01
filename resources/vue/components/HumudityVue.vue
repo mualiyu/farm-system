@@ -1,0 +1,54 @@
+// resources/components/HumudityVue.vue
+
+<template>
+  <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <img src="/assets/img/icons/unicons/hum.png" alt="Credit Card" class="rounded">
+              </div>
+              <div class="dropdown">
+                <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="bx bx-dots-vertical-rounded"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
+                  <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                  <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                </div>
+              </div>
+            </div>
+            <span>Humudity</span>
+            <h3 class="card-title text-nowrap mb-1"><span id="humm">{{humudity}}</span>gm<sup>-3</sup></h3>
+            <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +28.42%</small>
+          </div>
+        </div>
+</template>
+
+<script>
+import * as mqtt from 'mqtt';
+import { onMounted, ref } from 'vue';
+
+export default {
+    name: 'HumudityVue',
+    props: ['humudity'],
+    setup(){
+    const data = ref("");
+    onMounted(() => {
+      const client = mqtt.connect('mqtt://broker.emqx.io:8083/mqtt');
+  
+      client.subscribe("smart_farm/dataset");
+  
+      client.on('message', function (topic, message) {
+        data.value = message.toString();
+        const d = '{'+data.value+'}';
+        const jj = JSON.parse(d);
+        var node = jj.nodes[1];
+        node = node.split(',');
+
+        console.log(node[2]);
+        document.getElementById('humm').innerHTML=node[2];
+      })    
+    });
+  }
+}
+</script>

@@ -15,6 +15,18 @@ mix.options({
   postCss: [require('autoprefixer')]
 });
 
+
+// test vue js mix
+
+mix.js('resources/vue/app.js', 'public/js')
+    .vue({
+        version: 3,
+    })
+    .postCss('resources/vue/app.css', 'public/css', [
+        //
+    ]);
+
+
 /*
  |--------------------------------------------------------------------------
  | Configure Webpack
