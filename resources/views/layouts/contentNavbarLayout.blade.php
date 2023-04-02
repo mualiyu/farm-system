@@ -20,7 +20,7 @@ $container = ($container ?? 'container-xxl');
 @endphp
 
 @section('layoutContent')
-<div class="layout-wrapper layout-content-navbar {{ $isMenu ? '' : 'layout-without-menu' }}" id="app">
+<d  iv class="layout-wrapper layout-content-navbar {{ $isMenu ? '' : 'layout-without-menu' }}" id="app">
   <div class="layout-container">
 
     @if ($isMenu)
