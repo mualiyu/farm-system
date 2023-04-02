@@ -22,7 +22,6 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Main Page Route
-// Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
 Route::get('/account-settings', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 
 Route::get('/actuators', [ActuatorController::class, 'index'])->name('actuators');
