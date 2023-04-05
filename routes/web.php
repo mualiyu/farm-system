@@ -31,3 +31,5 @@ Route::post('/actuator/{actuator}/nodes', [ActuatorController::class, "store_nod
 Route::post('/actuator/{actuator}/reset', [ActuatorController::class, "reset"])->name('reset_actuator');
 Route::post('/actuator/{node}/node/delete', [ActuatorController::class, "delete_node"])->name('delete_node');
 Route::post('/actuator/{node}/node/update', [ActuatorController::class, "update_node"])->name('update_node');
+
+Route::get('/actuators/get_mode', [ActuatorController::class, 'get_mode'])->name('get_mode');

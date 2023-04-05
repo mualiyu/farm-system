@@ -147,6 +147,17 @@ class ActuatorController extends Controller
         $s_status=$s_status[0];
         return view("main.actuator.info", compact('actuator', 'nodes', 's_status'));
     }
+    
+    public function get_mode(Request $request)
+    {
+        $sys_status = SystemStatus::where('org_id', '=', Auth::user()->org->id)->get();
+
+        if (count($sys_status)>0) {
+            return $sys_status[0]->mode;
+        }else{
+            return 0;
+        }
+    }
 
     /**
      * Show the form for editing the specified resource.

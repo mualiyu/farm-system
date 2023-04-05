@@ -4,6 +4,70 @@
 
 @section('page-script')
 <script src="{{asset('assets/js/pages-account-settings-account.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>
+<script src="{{asset('js/mqtt.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js" integrity="sha512-bztGAvCE/3+a1Oh0gUro7BHukf6v7zpzrAb3ReWAVrt+bVNNphcl2tDTKCBr5zk7iEDmQ2Bv401fX3jeVXGIcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+      $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    
+      $(function() {
+
+        $('.operation').change(function() {
+            var pump = $(this).data('id'); 
+            var mode = $(this).prop('checked') == true ? 1 : 0; 
+            console.log(mode, pump);
+
+            var m = mode==1 ? "true":"false";
+            var p = pump==1 ? "true":"false";
+
+            msg = '{"pump": "'+p+'", "operationMode": "'+m+'"}';
+            
+            console.log(msg);
+
+            if (mode = 1) {
+              document.getElementById('flexSwitchCheckCheckedPump').disabled = $(this).prop('checked');
+            }else {
+              document.getElementById('flexSwitchCheckCheckedPump').disabled = $(this).prop('checked');
+            }
+
+            // publishMessage(msg);
+        });
+
+        $('.pumpp').change(function() {
+            var mode = $(this).data('id'); 
+            var pump = $(this).prop('checked') == true ? 1 : 0; 
+            // console.log(mode, pump);
+
+            var m = mode==1 ? "true":"false";
+            var p = pump==1 ? "true":"false";
+
+            $.ajax({
+                type: "GET",
+                // dataType: "json",
+                url: '{{ route("get_mode") }}',
+                // data: {'pumpStatus': pump, 'modeStatus': mode},
+                success: function(data){
+                  // console.log(data)
+                  var m = data==1 ? "true":"false";
+                  msg = '{"pump": "'+p+'", "operationMode": "'+m+'"}';
+                  publishMessage(msg);
+                  console.log(msg);
+                }
+            });
+
+            
+
+        });
+
+      })
+
+  </script>
+
 @endsection
 
 @section('content')
@@ -31,11 +95,19 @@
               <i class="bx bx-reset d-block d-sm-none"></i>
               <span class="d-none d-sm-block">Reset</span>
             </button>
-            <mode-vue device_id="{{$actuator->device_id}}" mode="{{$s_status->mode}}" pump="{{$s_status->pump}}" />
+            <div class="form-check form-switch mt-3">
+              <input class="form-check-input operation"  type="checkbox" role="switch" id="flexSwitchCheckCheckedMode" data-id="{{$s_status->pump}}" {{$s_status->mode ==1 ? "checked":" "}}>
+              <label class="form-check-label" for="flexSwitchCheckCheckedMode">Automatic Mode</label>
+            </div>
+            {{-- <mode-vue device_id="{{$actuator->device_id}}" mode="{{$s_status->mode}}" pump="{{$s_status->pump}}" /> --}}
             </div>
           </div>
           <div class="button-wrapper ">
-            <pump-vue device_id="{{$actuator->device_id}}" mode="{{$s_status->mode}}" pump="{{$s_status->pump}}" />
+            <div class="form-check form-switch">
+              <input class="form-check-input pumpp" type="checkbox" role="switchf" id="flexSwitchCheckCheckedPump" data-id="{{$s_status->mode}}" {{$s_status->pump==1 ? "checked":" "}}>
+              <label class="form-check-label" for="flexSwitchCheckCheckedPump">Water Pump</label>
+            </div>
+            {{-- <pump-vue device_id="{{$actuator->device_id}}" mode="{{$s_status->mode}}" pump="{{$s_status->pump}}" /> --}}
           </div>
       </div>
       <hr class="my-0">
