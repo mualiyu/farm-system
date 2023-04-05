@@ -59,8 +59,8 @@
               </div>
             </div>
             <span class="fw-semibold d-block mb-1">Temp</span>
-            <h3 class="card-title mb-2"><span id="d_temp">22</span><sup>o</sup>C</h3>
-            <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +72.80%</small>
+            <h3 class="card-title mb-2"><span id="d_temp">{{$s_details[0]->temperature ?? "0"}}</span><sup>o</sup>C</h3>
+            <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +0%</small>
           </div>
         </div>
       </div>
@@ -83,8 +83,8 @@
               </div>
             </div>
             <span>Humudity</span>
-            <h3 class="card-title text-nowrap mb-1"><span id="d_humm">33</span>gm<sup>-3</sup></h3>
-            <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +28.42%</small>
+            <h3 class="card-title text-nowrap mb-1"><span id="d_humm">{{$s_details[0]->humidity ?? "0"}}</span>gm<sup>-3</sup></h3>
+            <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +0%</small>
           </div>
         </div>
       </div>
@@ -157,7 +157,7 @@
                   <span class="badge bg-label-warning rounded-pill">Current</span>
                 </div>
                 <div class="mt-sm-auto">
-                  <h3 class="mb-0"><span id="d_soil">44</span>%</h3>
+                  <h3 class="mb-0"><span id="d_soil">{{$s_details[0]->moisture ?? "0"}}</span>%</h3>
                 </div>
               </div>
               <div id="profileReportChart"></div>
