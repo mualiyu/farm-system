@@ -2,7 +2,7 @@ function startConnect(){
 
     var clientID = "clientID - "+parseInt(Math.random() * 100);
 
-     client = new Paho.MQTT.Client("broker.emqx.io", Number(8083), "/mqtt", clientID);
+     client = new Paho.MQTT.Client("broker.emqx.io", Number(8084), "/mqtt", clientID);
 
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;
