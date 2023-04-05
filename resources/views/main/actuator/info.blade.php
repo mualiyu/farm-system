@@ -35,7 +35,7 @@
               document.getElementById('flexSwitchCheckCheckedPump').disabled = $(this).prop('checked');
             }
 
-            // publishMessage(msg);
+            publishMessage(msg);
         });
 
         $('.pumpp').change(function() {
