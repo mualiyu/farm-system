@@ -8,7 +8,8 @@ function startConnect(){
     client.onMessageArrived = onMessageArrived;
 
     client.connect({
-        onSuccess: onConnect
+        useSSL: true,
+        onSuccess: onConnect,
 //        userName: userId,
  //       passwordId: passwordId
     });
