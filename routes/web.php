@@ -33,3 +33,5 @@ Route::post('/actuator/{node}/node/delete', [ActuatorController::class, "delete_
 Route::post('/actuator/{node}/node/update', [ActuatorController::class, "update_node"])->name('update_node');
 
 Route::get('/actuators/get_mode', [ActuatorController::class, 'get_mode'])->name('get_mode');
+
+Route::get('/actuator/uppdate/node/details', [SensorDetailController::class, "update_details"]);
