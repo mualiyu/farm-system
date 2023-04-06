@@ -8,6 +8,7 @@
       , made by <a href="{{ (!empty(config('variables.creatorUrl')) ? config('variables.creatorUrl') : 'mukeey.online') }}" target="_blank" class="footer-link fw-bolder">{{ (!empty(config('variables.creatorName')) ? config('variables.creatorName') : 'Usman Muktar') }}</a>
     </div>
     <div>
+      <a href="{{ config('variables.instagramUrl') ? config('variables.instagramUrl') : '#' }}" class="footer-link me-4" target="_blank">Instagram</a>
       <a href="{{ config('variables.licenseUrl') ? config('variables.licenseUrl') : '#' }}" class="footer-link me-4" target="_blank">License</a>
     </div>
   </div>
